@@ -1,1 +1,1 @@
-# Designer-pattern-learning
+#JavaScript设计者模式学习笔记
