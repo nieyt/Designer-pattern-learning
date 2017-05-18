@@ -29,10 +29,15 @@ gulp.task('Less', function () {
         .pipe(gulp.dest('css/css'))//将会在css下生成index.css
         .pipe(livereload());
 });
+gulp.task('Html', function () {
+    gulp.src('面向对象的JavaScript/*.html')
+        .pipe(livereload());
+});
 //gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组)
 //gulp.dest(path[, options]) 处理完后文件生成路径
 gulp.task('Watch', function () {
     livereload.listen();
     gulp.watch('css/less/*.less', ['Less']); //当所有less文件发生改变时，调用testLess任务
     gulp.watch('js/es6/*.js', ['ES6']); //当所有less文件发生改变时，调用任务
+    gulp.watch('面向对象的JavaScript/*.html', ['Html']); //当所有less文件发生改变时，调用任务
 });

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象的JavaScript</title>
+    <link rel="stylesheet" href="../css/css/index.css">
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<h1>为了方便控制台看输出,你可以随意引入不同章节的js文件查看</h1>
+<h2 id="test"></h2>
+<body>
+</body>
+<script src="../js/es/first.js"></script>
+<script>
+    js();
+    function js(){
+        var target = document.getElementById("test");
+        var content = document.getElementsByTagName("script")[0].src;
+        var index=content.lastIndexOf("/");
+        var ss=content.slice(index+1,content.length-3);
+        target.append("当前"+ss+"章内容");
+    }
+</script>
+</html>
