@@ -140,7 +140,102 @@ console.log(bill.getGreeting());
 console.log("======================================666");
 //总结 在对象声明之后，利用prototype给对象进行扩展属性，已声明对象仍可以使用新属性；
 
+// 第一章总结
+// JavaScript是弱语言，定义变量时可以不声明变量类型。
+// 函数是一等对象，可以动态创建，所以你可以创建闭包。
+// 对象和类都可以变化，可以在运行时变化
+// 继承有两种：原型继承，类式继承
+console.log("=====================第二章==================");
+//注释接口
+/*
+interface Composite{
+  function add(child);
+  function remove(child);
+  function getChild(index);
+}
+interface FormItem(){
+    function save();
+}
+*/
+var CompositeForm = function(id,method,action){
+    console.log("id is "+id);
+};
+CompositeForm.prototype.add = function(child){
+    console.log("add "+child);
+};
+CompositeForm.prototype.remove = function(child){
+    console.log("remove "+child);
+};
+CompositeForm.prototype.getChild = function(index){
+    console.log("get "+index+1+"类");
+};
+CompositeForm.prototype.save=function(){
+    console.log("now you saved");
+};
+var my=new CompositeForm(1,2,3);
+my.add("mychild");
+// 比较推荐的写法
+ var interface1 = function(name,methods){//创建接口
+     console.log(arguments.length);
+     // 入参数量不准确错误处理
+     if(arguments.length !=2){
+         throw new Error("interface constructor called whit"+arguments.length+"argument,but expected exactly 2.")
+     }
 
+     this.name = name;
+     //给此时的接口依次添加写入的方法
+     this.methods = [];
+     for(var i=0,len = methods.length;i<len;i++){
+         // 对参数数据类型做判断
+         if(typeof methods[i]!=="string"){
+             // 错误提示
+            throw new Error("参数数据类型错误！");
+         }
+         this.methods.push(methods[i])
+     }
+     console.log(typeof this.methods[0])
+ };
+function getDate(date){
+    console.log("your get "+date)
+};
+var getResults = function(){
+    console.log("i don't know results");
+};
+var ResultSet =new interface1("ResultSet",["getDate","getResults"]);
+// ResultSet.getDate("lucy");
+//实际运用
+var ResultFormatter = function(resultObject){
+    if(!(resultObject instanceof TestResult)){
+        throw new Error("error");
+    }else{
+        console.log("已成功调用接口");
+    }
+
+    this.resultObject=resultObject;
+};
+ResultFormatter.prototype.renderResults=function(){
+    var dateOfTest = this.resultObject.getDate();
+    var resultArray = this.resultObject.getResults();
+
+    var resultsContainter = document.createElement("div");
+
+    var resultsHeader = document.createElement("h3");
+    resultsHeader.innerHTML= "test results from"+dateOfTest.toUTCString();
+    resultsContainter.appendChild(resultsHeader);
+
+    var resultItList = document.createElement("ul");
+    resultsContainter.appendChild(resultItList);
+
+    for(var i=0,len=resultArray.length;i<len;i++){
+        var listItem = document.createElement("li");
+        listItem.innerHTML=resultArray[i];
+        resultsList.appendChild(listItem);
+    }
+    return resultsContainter;
+
+};
+console.log("wait..............!!!!!!");
+console.log("==================第二章接口结束==============");
 
 
 
